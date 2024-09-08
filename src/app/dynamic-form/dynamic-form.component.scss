@@ -1,0 +1,33 @@
+form{
+  padding: 1rem;
+}
+
+mat-form-field{
+  display: block;
+}
+.array-container{
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+
+}
+
+
+.group-item-container{
+ border: 1px solid black;
+  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+
+.action-buttons{
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.remove{
+  margin-bottom: 10px;
+}

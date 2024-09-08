@@ -1,0 +1,164 @@
+<ng-container *ngIf="isLoaded">
+  <form [formGroup]="form" class="example-container">
+    <!-- group Fileds  -->
+    <ng-container *ngFor="let group of groupsControls">
+      <div [formArrayName]="group.groupName" class="array-container">
+
+        <h2>{{group.groupName}}</h2>
+
+        <ng-container *ngFor="let groupItem of  getFormArray(group.groupName)?.controls; index as groupIndex">
+
+          <div [formGroupName]="groupIndex" class="group-item-container">
+
+            <ng-container *ngFor="let control of group.items">
+
+              <mat-form-field>
+                <mat-label>{{control.fieldName}}</mat-label>
+                <input *ngIf="control.type === 'int'" type="number" matInput [formControlName]="control.fieldName">
+                <input *ngIf="control.type === 'string'" type="text" matInput [formControlName]="control.fieldName">
+
+                <mat-error *ngIf="control.mandatory"> This filed is required</mat-error>
+              </mat-form-field>
+
+            </ng-container>
+
+
+            <!-- child loop  -->
+
+
+
+            <ng-container *ngIf="!!group.child" class="child-container">
+              <ng-container *ngFor="let childGroup of group.child">
+
+                <div [formArrayName]="childGroup.groupName" class="array-container">
+
+                  <h2>{{childGroup.groupName}}</h2>
+
+                  <ng-container
+                    *ngFor="let groupItem of  getFormNestedFormArray(group.groupName, groupIndex, childGroup.groupName)?.controls; index as i">
+                    <div [formGroupName]="i">
+
+                      <ng-container *ngFor="let control of childGroup.items">
+
+                        <mat-form-field>
+                          <mat-label>{{control.fieldName}}</mat-label>
+                          <input *ngIf="control.type === 'int'" type="number" matInput
+                            [formControlName]="control.fieldName">
+                          <input *ngIf="control.type === 'string'" type="text" matInput
+                            [formControlName]="control.fieldName">
+
+                          <mat-error *ngIf="control.mandatory"> This filed is required</mat-error>
+                        </mat-form-field>
+
+                      </ng-container>
+                    </div>
+
+
+                    <div>
+                      <button type="button" *ngIf="i>0"
+                        (click)="removeFromArray(getFormNestedFormArray(group.groupName, groupIndex, childGroup.groupName) , i)"
+                        mat-button mat-raised-button color="warn" class="remove">remove </button>
+                    </div>
+
+                  </ng-container>
+
+
+
+
+                  <div>
+                    <button
+                      (click)="addFormGroupToArray(getFormNestedFormArray(group.groupName, groupIndex, childGroup.groupName) , childGroup.items)"
+                      mat-button mat-raised-button color="primary" type="button">add new
+                      {{childGroup.groupName}}</button>
+                  </div>
+
+                </div>
+              </ng-container>
+            </ng-container>
+            <!-- end child loop  -->
+          </div>
+
+          <div>
+            <button type="button" *ngIf="groupIndex>0"
+              (click)="removeFromArray(getFormArray(group.groupName) , groupIndex)" mat-button mat-raised-button
+              color="warn" class="remove">remove from parent</button>
+          </div>
+        </ng-container>
+
+        <div>
+          <button mat-raised-button color="primary" type="button"
+            (click)="addFormGroupToArray(getFormArray(group.groupName) , group.items, group?.child?.[0])" mat-button>
+            add new {{group.groupName}}</button>
+        </div>
+      </div>
+
+    </ng-container>
+
+
+    <!-- control Fields  -->
+    <ng-container *ngFor="let controlItem of controls_fields">
+      <ng-container *ngIf="controlItem.item.isMulti">
+        <div [formArrayName]="controlItem.fieldName">
+
+          <ng-container *ngFor="let arrayControl of  getFormArray(controlItem.fieldName)?.controls; index as i">
+
+            <mat-form-field>
+              <mat-label>{{controlItem.fieldName}}</mat-label>
+              <input *ngIf="controlItem.item.type ==='int'" type="number" matInput [formControlName]="i">
+              <input *ngIf="controlItem.item.type ==='string'" type="string" matInput [formControlName]="i">
+
+              <mat-error *ngIf="controlItem.item.mandatory"> This filed is required</mat-error>
+            </mat-form-field>
+
+
+            <div *ngIf=" i !==0" class="remove">
+              <button (click)="removeFromArray(getFormArray(controlItem.fieldName) , i)" mat-button mat-raised-button
+                color="warn" type="button">remove</button>
+            </div>
+
+
+          </ng-container>
+
+
+          <div>
+            <button type="button" color="primary"
+              (click)="addFormControlToArray(getFormArray(controlItem.fieldName) , getFormArray(controlItem.fieldName).get('0') )" mat-button
+              mat-raised-button color="primary">add new {{controlItem.fieldName}}</button>
+          </div>
+        </div>
+
+
+
+
+
+      </ng-container>
+
+
+
+      <ng-container *ngIf="!controlItem.item.isMulti">
+        <mat-form-field>
+          <mat-label>{{controlItem.fieldName}}</mat-label>
+          <input *ngIf="controlItem.item.type === 'int'" type="number" matInput
+            [formControlName]="controlItem.fieldName">
+          <input *ngIf="controlItem.item.type === 'string'" type="text" matInput
+            [formControlName]="controlItem.fieldName">
+
+          <mat-error *ngIf="controlItem.item.mandatory"> This filed is required</mat-error>
+        </mat-form-field>
+      </ng-container>
+
+
+    </ng-container>
+
+
+    <div class="action-buttons">
+      <button type="button" mat-raised-button color="primary" (click)="submit()" mat-button>Submit</button>
+
+      <button type="button" mat-raised-button (click)="cancel()">
+        Cancel
+      </button>
+
+
+    </div>
+  </form>
+</ng-container>
