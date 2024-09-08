@@ -20,4 +20,9 @@ export class AjaxService {
     return this.http
     .get<DynamicForm>('assets/form-data2.json')
   }
+
+  getThirdData(){
+    return this.http
+    .get<DynamicForm>('assets/ahmedData.json')
+  }
 }

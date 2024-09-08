@@ -13,6 +13,14 @@
         <app-dynamic-form [formData]="formData"></app-dynamic-form>
       </mat-tab>
     </ng-container>
+
+
+
+    <ng-container *ngIf="thirdData$ | async as formData">
+      <mat-tab [label]="formData.ID">
+        <app-dynamic-form [formData]="formData"></app-dynamic-form>
+      </mat-tab>
+    </ng-container>
   </mat-tab-group>
 
 </div>

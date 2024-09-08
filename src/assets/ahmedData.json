@@ -1,36 +1,80 @@
 {
-  "ID": "testtable2",
-  "table_name": "testtable2",
+  "ID": "Ahmed Data",
+  "table_name": "Ahmed Data",
   "fieldName": [
       {
-          "fieldName": "studentNo",
+          "fieldName": "teacherNo",
           "type": "string",
-          "Group": "student",
+          "Group": "teacher",
           "mandatory": true
       },
       {
-          "fieldName": "studentName",
+          "fieldName": "teacherName",
           "type": "string",
           "mandatory": true,
-          "Group": "student"
+          "Group": "teacher"
       },
+
       {
           "fieldName": "contactNumber",
           "type": "int",
           "mandatory": true,
-          "Group": "student$contactDetail"
+          "Group": "teacher$contactDetail"
       },
+
       {
           "fieldName": "rleation",
           "type": "string",
           "mandatory": true,
-          "Group": "student$contactDetail"
+          "Group": "teacher$contactDetail"
       },
+
       {
-          "fieldName": "inputter",
+          "fieldName": "classess",
           "type": "string",
           "mandatory": true,
           "Group": ""
-      }
+      },
+
+      {
+        "fieldName": "studentNo",
+        "type": "string",
+        "Group": "student",
+        "mandatory": true
+    },
+    {
+        "fieldName": "studentName",
+        "type": "string",
+        "mandatory": true,
+        "Group": "student"
+    },
+    {
+        "fieldName": "contactNumber",
+        "type": "int",
+        "mandatory": true,
+        "Group": "student$contactDetail"
+    },
+    {
+        "fieldName": "rleation",
+        "type": "string",
+        "mandatory": true,
+        "Group": "student$contactDetail"
+    },
+    {
+        "fieldName": "inputter",
+        "type": "string",
+        "mandatory": true,
+        "Group": ""
+    },
+    {
+      "fieldName": "zipCode",
+      "type": "int",
+      "isMulti": true,
+      "mandatory": true,
+      "noChange": false,
+      "Group": "addressDetail"
+  }
+
+
   ]
 }

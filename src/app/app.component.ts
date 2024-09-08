@@ -8,7 +8,9 @@ import { AjaxService } from './services/ajax.service';
 })
 export class AppComponent {
   firstData$ = this.ajax.getFirstData();
-  secondData$ = this.ajax.getSecondData()
+  secondData$ = this.ajax.getSecondData();
+  thirdData$ = this.ajax.getThirdData();
+
   constructor(private ajax: AjaxService){
 
   }
