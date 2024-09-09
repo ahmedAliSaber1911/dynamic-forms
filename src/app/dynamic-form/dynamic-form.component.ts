@@ -117,14 +117,7 @@ export class DynamicFormComponent implements OnInit {
       }
     });
 
-    // console.log(this.form.value, 'value');
-    // console.log(this.form, 'form');
-    // console.log(this.groupsControls, 'controls');
 
-    // console.log(
-    //   this.form.get('student')?.get('0')?.get('student$contactDetail')?.get('0')
-    //     ?.value
-    // );
 
     this.isLoaded = true;
   }

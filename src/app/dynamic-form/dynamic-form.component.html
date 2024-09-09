@@ -1,5 +1,5 @@
 <ng-container *ngIf="isLoaded">
-  <form [formGroup]="form" class="example-container">
+  <form [formGroup]="form" class="form-container">
     <!-- group Fileds  -->
     <ng-container *ngFor="let group of groupsControls">
       <div [formArrayName]="group.groupName" class="array-container">
@@ -57,7 +57,7 @@
                     <div>
                       <button type="button" *ngIf="i>0"
                         (click)="removeFromArray(getFormNestedFormArray(group.groupName, groupIndex, childGroup.groupName) , i)"
-                        mat-button mat-raised-button color="warn" class="remove">remove </button>
+                        mat-button mat-raised-button  class="remove">remove </button>
                     </div>
 
                   </ng-container>
@@ -81,7 +81,7 @@
           <div>
             <button type="button" *ngIf="groupIndex>0"
               (click)="removeFromArray(getFormArray(group.groupName) , groupIndex)" mat-button mat-raised-button
-              color="warn" class="remove">remove from parent</button>
+               class="remove">remove from parent</button>
           </div>
         </ng-container>
 
@@ -106,31 +106,21 @@
               <mat-label>{{controlItem.fieldName}}</mat-label>
               <input *ngIf="controlItem.item.type ==='int'" type="number" matInput [formControlName]="i">
               <input *ngIf="controlItem.item.type ==='string'" type="string" matInput [formControlName]="i">
-
               <mat-error *ngIf="controlItem.item.mandatory"> This filed is required</mat-error>
             </mat-form-field>
-
-
             <div *ngIf=" i !==0" class="remove">
               <button (click)="removeFromArray(getFormArray(controlItem.fieldName) , i)" mat-button mat-raised-button
                 color="warn" type="button">remove</button>
             </div>
-
-
           </ng-container>
-
 
           <div>
             <button type="button" color="primary"
               (click)="addFormControlToArray(getFormArray(controlItem.fieldName) , getFormArray(controlItem.fieldName).get('0') )" mat-button
               mat-raised-button color="primary">add new {{controlItem.fieldName}}</button>
           </div>
+
         </div>
-
-
-
-
-
       </ng-container>
 
 
@@ -138,12 +128,14 @@
       <ng-container *ngIf="!controlItem.item.isMulti">
         <mat-form-field>
           <mat-label>{{controlItem.fieldName}}</mat-label>
+
           <input *ngIf="controlItem.item.type === 'int'" type="number" matInput
             [formControlName]="controlItem.fieldName">
+
           <input *ngIf="controlItem.item.type === 'string'" type="text" matInput
             [formControlName]="controlItem.fieldName">
 
-          <mat-error *ngIf="controlItem.item.mandatory"> This filed is required</mat-error>
+          <mat-error *ngIf="controlItem.item.mandatory" > This filed is required</mat-error>
         </mat-form-field>
       </ng-container>
 
@@ -154,7 +146,7 @@
     <div class="action-buttons">
       <button [disabled]="form.invalid" type="button" mat-raised-button color="primary" (click)="submit()" mat-button>Submit</button>
 
-      <button type="button" mat-raised-button (click)="cancel()">
+      <button type="button" mat-raised-button color="warn" (click)="cancel()">
         Cancel
       </button>
 
